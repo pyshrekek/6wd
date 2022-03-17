@@ -42,13 +42,14 @@ public class SixWheel extends LinearOpMode {
         while (opModeIsActive()){
             double x = gamepad1.left_stick_x;
             double y = gamepad1.left_stick_y;
-            double left = signedExp(x,2);
+            double left = signedExp(x,1);
             double right = y;
             double squareCoord =returnBiggerMag(x,y);
             bruh++;
             telemetry.addData("left stick x", gamepad1.left_stick_x);
             telemetry.addData("left stick y", gamepad1.left_stick_y);
             telemetry.addData("test", bruh);
+            telemetry.addData("bruh", leftFront.getPower());
             telemetry.update();
             if (squareCoord==x){
                 if (y>0){
