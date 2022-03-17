@@ -15,6 +15,16 @@ public class SixWheel extends LinearOpMode {
         }
     }
 
+    public double signedExp(double a,double b){
+        int factor = 1;
+        double newA = a;
+        if (a>0){
+            factor = -1;
+            newA*=-1;
+        }
+        return factor*Math.pow(newA,b);
+    }
+
     @Override
     public void runOpMode() throws InterruptedException {
         rightFront = hardwareMap.get(DcMotor.class,"rightFront");
@@ -32,7 +42,7 @@ public class SixWheel extends LinearOpMode {
         while (opModeIsActive()){
             double x = gamepad1.left_stick_x;
             double y = gamepad1.left_stick_y;
-            double left = x;
+            double left = signedExp(x,2);
             double right = y;
             double squareCoord =returnBiggerMag(x,y);
             bruh++;
