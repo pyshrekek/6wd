@@ -18,7 +18,7 @@ public class SixWheel extends LinearOpMode {
     public double signedExp(double a,double b){
         int factor = 1;
         double newA = a;
-        if (a>0){
+        if (a<0){
             factor = -1;
             newA*=-1;
         }
@@ -42,16 +42,17 @@ public class SixWheel extends LinearOpMode {
         while (opModeIsActive()){
             double x = gamepad1.left_stick_x;
             double y = gamepad1.left_stick_y;
-            double left = signedExp(x,1);
+            double newX = signedExp(x,2);
+            double left = newX;
             double right = y;
-            double squareCoord =returnBiggerMag(x,y);
+            double squareCoord =returnBiggerMag(newX,y);
             bruh++;
             telemetry.addData("left stick x", gamepad1.left_stick_x);
             telemetry.addData("left stick y", gamepad1.left_stick_y);
             telemetry.addData("test", bruh);
             telemetry.addData("bruh", leftFront.getPower());
             telemetry.update();
-            if (squareCoord==x){
+            if (squareCoord==newX){
                 if (y>0){
                     right-= squareCoord;
                 } else {
@@ -59,11 +60,11 @@ public class SixWheel extends LinearOpMode {
                     left = left + y;
                 }
             } else {
-                if (x<0){
+                if (newX<0){
                     left+= squareCoord;
                 } else {
                     left = squareCoord;
-                    right= right- x;
+                    right= right- newX;
                 }
             }
             processInputs(left,right);
