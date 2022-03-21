@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.opMode.teleOp;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+@TeleOp
 public class daniel extends LinearOpMode {
 
     public DcMotor leftFront,leftRear,rightFront,rightRear;
@@ -21,10 +23,10 @@ public class daniel extends LinearOpMode {
         waitForStart();
 
         while (opModeIsActive()){
-            double leftStick = gamepad1.left_stick_x;
+            double leftStick = gamepad1.left_stick_y;
             double rightStick = gamepad1.right_stick_y;
-            double leftDrive = leftStick;
-            double rightDrive = rightStick;
+            double leftDrive = rightStick;
+            double rightDrive = leftStick;
             telemetry.addData("leftStick", gamepad1.left_stick_y);
             telemetry.addData("rightStick", gamepad1.right_stick_y);
             telemetry.update();
@@ -39,7 +41,7 @@ public class daniel extends LinearOpMode {
         // RIGHT STICKS CONTROLS RIGHT WHEELS
         leftFront.setPower(leftDrive);
         leftRear.setPower(leftDrive);
-        rightFront.setPower(rightDrive);
-        rightRear.setPower(rightDrive);
+        rightFront.setPower(-rightDrive);
+        rightRear.setPower(-rightDrive);
     }
 }
